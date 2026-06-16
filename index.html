@@ -191,6 +191,148 @@ footer{padding:34px 0 120px;color:var(--muted);font-size:12.5px;border-top:1px s
   .tagstats{margin-left:0;width:100%}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ── BOTTOM ACTION BAR ─────────────────────────────── */
+.bottombar{position:fixed;bottom:0;left:0;right:0;z-index:60;display:flex;align-items:center;gap:10px;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));
+  background:rgba(244,246,242,.94);backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);box-shadow:0 -2px 16px rgba(34,49,43,.06);}
+.bb-start{flex:1;font-family:"Barlow Condensed";font-weight:800;font-size:18px;letter-spacing:.4px;
+  background:var(--acc);color:#fff;border:none;border-radius:12px;padding:13px 16px;cursor:pointer;
+  transition:background .15s;}
+.bb-start:hover,.bb-start:active{background:var(--acc-ink)}
+.bb-timer{flex-shrink:0;font-family:"Barlow Condensed";font-weight:700;font-size:14px;
+  background:var(--ink);color:#fff;border:none;border-radius:12px;padding:13px 14px;cursor:pointer;
+  line-height:1;transition:background .15s;}
+.bb-timer:hover,.bb-timer:active{background:#2e4038}
+body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+/* nav: bigger tap targets, horizontal scroll */
+#nav{gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px;}
+#nav a{white-space:nowrap;padding:6px 12px;min-height:38px;display:flex;align-items:center;font-size:13.5px;}
+/* level chips: bigger touch */
+.lv{min-height:36px;padding:5px 10px;}
+
+/* ── TIMER SHEET ────────────────────────────────────── */
+.ts{position:fixed;inset:0;z-index:70;display:flex;flex-direction:column;justify-content:flex-end;}
+.ts-bd{flex:1;background:rgba(34,49,43,.35);backdrop-filter:blur(2px);cursor:pointer;}
+.ts-panel{background:var(--card);border-radius:20px 20px 0 0;
+  padding:20px 24px calc(24px + env(safe-area-inset-bottom,0px));
+  display:flex;flex-direction:column;align-items:center;gap:14px;}
+.ts-head{display:flex;align-items:center;width:100%;justify-content:space-between;}
+.ts-ttl{font-family:"Barlow Condensed";font-weight:700;font-size:18px;color:var(--ink);letter-spacing:.3px;}
+.ts-x{width:30px;height:30px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--line);font-size:13px;color:var(--muted);display:flex;align-items:center;justify-content:center;}
+.ts-rw{position:relative;width:150px;height:150px;display:flex;align-items:center;justify-content:center;}
+.ts-rw svg{position:absolute;top:0;left:0;}
+.ts-n{font-family:"Barlow Condensed";font-weight:900;font-size:52px;color:var(--ink);position:relative;z-index:1;}
+.ts-btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.ts-btns button{font-family:"Barlow Condensed";font-weight:700;font-size:16px;
+  padding:10px 18px;border:none;border-radius:10px;cursor:pointer;background:var(--line);color:var(--ink);}
+.ts-btns button.go{background:var(--acc);color:#fff;}
+@media(min-width:721px){.ts-panel{max-width:380px;margin:0 auto;border-radius:16px;margin-bottom:20px;}}
+
+/* ── SESSION OVERLAY ────────────────────────────────── */
+.so{position:fixed;inset:0;z-index:80;background:var(--paper);
+  display:flex;flex-direction:column;overflow:hidden;}
+/* Header */
+.so-hdr{padding:calc(8px + env(safe-area-inset-top,0px)) 14px 8px;
+  display:flex;align-items:center;gap:10px;
+  background:var(--card);border-bottom:1px solid var(--line);flex-shrink:0;}
+.so-prog{flex:1;display:flex;flex-direction:column;gap:5px;}
+.so-bar{height:4px;background:var(--line);border-radius:2px;overflow:hidden;}
+.so-fill{height:100%;background:var(--acc);border-radius:2px;transition:width .35s;}
+.so-step-lbl{font-size:11px;color:var(--muted);font-family:"Barlow Condensed";
+  font-weight:600;letter-spacing:.5px;}
+.so-hdr-acts{display:flex;gap:6px;}
+.so-ico{width:38px;height:38px;border-radius:10px;border:none;cursor:pointer;font-size:15px;
+  background:var(--line);color:var(--ink);}
+/* Scrollable body */
+.so-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;}
+/* Panes */
+.so-pane{flex:1;display:flex;flex-direction:column;align-items:center;
+  padding:18px 18px 20px;box-sizing:border-box;}
+/* Intro pane */
+.so-intro-title{font-family:"Barlow Condensed";font-weight:900;font-size:28px;
+  color:var(--ink);margin-bottom:6px;text-align:center;}
+.so-intro-sub{font-size:14px;color:var(--muted);text-align:center;line-height:1.6;
+  margin-bottom:20px;max-width:320px;}
+.so-intro-seq{width:100%;max-width:360px;display:flex;flex-direction:column;gap:6px;margin-bottom:22px;}
+.so-seq-row{background:var(--card);border-radius:10px;padding:10px 14px;
+  display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink);}
+.so-seq-row .srt{font-family:"Barlow Condensed";font-weight:700;font-size:12px;
+  color:var(--muted);min-width:36px;}
+/* Exercise pane */
+.so-tag{font-family:"Barlow Condensed";font-weight:700;font-size:12px;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);
+  background:var(--line);border-radius:20px;padding:3px 12px;margin-bottom:8px;}
+.so-en{font-family:"Barlow Condensed";font-weight:900;font-size:28px;
+  color:var(--ink);text-align:center;line-height:1.1;margin-bottom:10px;}
+.so-fig{width:min(220px,72vw);aspect-ratio:260/200;margin-bottom:8px;flex-shrink:0;}
+.so-fig svg{width:100%;height:100%;}
+.so-tgt{font-family:"Barlow Condensed";font-weight:800;font-size:22px;
+  color:var(--acc);letter-spacing:.3px;}
+.so-tour-lbl{font-size:12px;color:var(--muted);margin-top:2px;
+  font-family:"Barlow Condensed";font-weight:600;}
+/* Timed countdown ring */
+.so-crw{position:relative;width:120px;height:120px;display:flex;
+  align-items:center;justify-content:center;margin:8px 0;flex-shrink:0;}
+.so-crw svg{position:absolute;top:0;left:0;}
+.so-crn{font-family:"Barlow Condensed";font-weight:900;font-size:44px;
+  color:var(--ink);position:relative;z-index:1;}
+/* Muscles */
+.so-musc{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:8px 0;}
+.so-mt{font-size:12px;background:var(--acc-soft);color:var(--acc-ink);
+  border-radius:20px;padding:2px 10px;}
+/* Cue collapsible */
+.so-cue-btn{background:none;border:1px solid var(--line);border-radius:20px;
+  padding:5px 14px;font-size:13px;color:var(--muted);cursor:pointer;margin-top:6px;}
+.so-cue-panel{background:var(--card);border-radius:12px;padding:12px 14px;
+  font-size:13px;color:var(--muted);margin-top:8px;width:100%;
+  box-sizing:border-box;line-height:1.6;text-align:left;}
+/* Rest pane */
+.so-rest-pane{background:var(--card);}
+.so-rest-ttl{font-family:"Barlow Condensed";font-weight:900;font-size:22px;
+  letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.so-rrw{position:relative;width:190px;height:190px;display:flex;
+  align-items:center;justify-content:center;margin:6px 0;flex-shrink:0;}
+.so-rrw svg{position:absolute;top:0;left:0;}
+.so-rn{font-family:"Barlow Condensed";font-weight:900;font-size:68px;
+  color:var(--ink);position:relative;z-index:1;}
+.so-next-wrap{text-align:center;margin-bottom:10px;}
+.so-next-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;
+  letter-spacing:1px;font-family:"Barlow Condensed";font-weight:600;margin-bottom:6px;}
+.so-next-fig{width:80px;margin:0 auto 4px;aspect-ratio:260/200;}
+.so-next-fig svg{width:100%;height:100%;}
+.so-next-name{font-family:"Barlow Condensed";font-weight:700;font-size:14px;color:var(--ink);}
+.so-rest-acts{display:flex;gap:10px;margin-top:6px;}
+/* Done pane */
+.so-done-pane{justify-content:center;gap:16px;}
+.so-done-em{font-size:64px;}
+.so-done-ttl{font-family:"Barlow Condensed";font-weight:900;font-size:32px;color:var(--ink);}
+.so-done-sub{font-size:14px;color:var(--muted);text-align:center;max-width:260px;line-height:1.5;}
+/* Buttons */
+.so-btn-p{font-family:"Barlow Condensed";font-weight:800;font-size:17px;
+  background:var(--acc);color:#fff;border:none;border-radius:12px;
+  padding:13px 22px;cursor:pointer;transition:background .15s;}
+.so-btn-p:hover,.so-btn-p:active{background:var(--acc-ink)}
+.so-btn-g{font-family:"Barlow Condensed";font-weight:700;font-size:16px;
+  background:none;border:1.5px solid var(--line);color:var(--ink);
+  border-radius:12px;padding:12px 18px;cursor:pointer;}
+.so-btn-g:hover,.so-btn-g:active{background:var(--line)}
+.so-btn-d{font-family:"Barlow Condensed";font-weight:700;font-size:15px;
+  background:none;border:none;color:#b33;cursor:pointer;padding:8px 12px;}
+/* Footer */
+.so-foot{padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));
+  display:flex;gap:8px;background:var(--card);
+  border-top:1px solid var(--line);flex-shrink:0;}
+.so-foot .so-btn-g{flex-shrink:0;}
+.so-foot .so-btn-p{flex:1;}
+/* Pause overlay */
+.so-po{position:absolute;inset:0;background:rgba(244,246,242,.96);
+  display:flex;align-items:center;justify-content:center;z-index:5;}
+.so-pc{display:flex;flex-direction:column;align-items:center;gap:16px;padding:32px;}
+.so-po-ttl{font-family:"Barlow Condensed";font-weight:900;font-size:28px;color:var(--ink);}
+
 </style>
 </head>
 <body>
@@ -314,19 +456,138 @@ footer{padding:34px 0 120px;color:var(--muted);font-size:12.5px;border-top:1px s
 
 </div>
 
-<div class="timer">
-  <span class="lbl">Repos</span>
-  <svg width="46" height="46" viewBox="0 0 46 46">
-    <circle cx="23" cy="23" r="19" fill="none" stroke="#34463e" stroke-width="5"/>
-    <circle id="ring" cx="23" cy="23" r="19" fill="none" stroke="#ef5b2b" stroke-width="5"
-      stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90 23 23)"/>
-  </svg>
-  <div class="ttxt" id="ttxt">90</div>
-  <div class="btns">
-    <button class="go" id="t90">90 s</button>
-    <button id="t60">60 s</button>
+<!-- ── BARRE D'ACTION BAS ── -->
+<div class="bottombar" id="bottombar">
+  <button class="bb-start" id="bb-start">&#9654; Démarrer la séance</button>
+  <button class="bb-timer" id="bb-timer">&#9203;&nbsp;Minuteur</button>
+</div>
+
+<!-- ── TIMER SHEET (minuteur de repos rapide) ── -->
+<div class="ts" id="ts" hidden>
+  <div class="ts-bd" id="ts-bd"></div>
+  <div class="ts-panel">
+    <div class="ts-head">
+      <span class="ts-ttl">Minuteur de repos</span>
+      <button class="ts-x" id="ts-x">&#10005;</button>
+    </div>
+    <div class="ts-rw">
+      <svg width="150" height="150" viewBox="0 0 150 150">
+        <circle cx="75" cy="75" r="63" fill="none" stroke="var(--line)" stroke-width="8"/>
+        <circle id="ts-ring" cx="75" cy="75" r="63" fill="none" stroke="var(--acc)" stroke-width="8"
+          stroke-linecap="round" transform="rotate(-90 75 75)"/>
+      </svg>
+      <div class="ts-n" id="ts-n">90</div>
+    </div>
+    <div class="ts-btns">
+      <button class="go" id="ts-90">90 s</button>
+      <button id="ts-60">60 s</button>
+      <button id="ts-45">45 s</button>
+    </div>
   </div>
 </div>
+
+<!-- ── MODE SÉANCE GUIDÉ ── -->
+<div class="so" id="so" hidden>
+
+  <!-- En-tête : progression + contrôles permanents -->
+  <div class="so-hdr">
+    <div class="so-prog">
+      <div class="so-bar"><div class="so-fill" id="so-fill" style="width:0%"></div></div>
+      <span class="so-step-lbl" id="so-step-lbl">Étape 1 / 20</span>
+    </div>
+    <div class="so-hdr-acts">
+      <button class="so-ico" id="so-pause-btn" title="Pause / Reprendre">&#9208;</button>
+      <button class="so-ico" id="so-quit-btn" title="Quitter">&#10005;</button>
+    </div>
+  </div>
+
+  <!-- Corps défilable : un seul panneau visible à la fois -->
+  <div class="so-body" id="so-body">
+
+    <!-- Panneau INTRO -->
+    <div class="so-pane" id="so-intro">
+      <div style="flex:1"></div>
+      <div class="so-intro-title">Séance du jour</div>
+      <div class="so-intro-sub">Prépare ton espace — la séquence est construite sur tes niveaux actuels.</div>
+      <div class="so-intro-seq" id="so-intro-seq"></div>
+      <button class="so-btn-p" id="so-intro-go" style="width:100%;max-width:340px;font-size:19px;padding:15px 0">
+        &#9654; C'est parti !
+      </button>
+      <div style="flex:1.5"></div>
+    </div>
+
+    <!-- Panneau EXERCICE -->
+    <div class="so-pane" id="so-ex" hidden>
+      <div class="so-tag" id="so-tag">Échauffement</div>
+      <div class="so-en" id="so-en">Nom de l'exercice</div>
+      <div class="so-fig" id="so-fig"></div>
+      <div class="so-tgt" id="so-tgt">30 s</div>
+      <div class="so-tour-lbl" id="so-tour-lbl"></div>
+      <!-- Anneau décompte (chronométrés uniquement) -->
+      <div class="so-crw" id="so-crw" hidden>
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="none" stroke="var(--line)" stroke-width="7"/>
+          <circle id="so-ring" cx="60" cy="60" r="50" fill="none" stroke="var(--acc)" stroke-width="7"
+            stroke-linecap="round" transform="rotate(-90 60 60)"/>
+        </svg>
+        <div class="so-crn" id="so-crn">30</div>
+      </div>
+      <div class="so-musc" id="so-musc"></div>
+      <button class="so-cue-btn" id="so-cue-btn">Consigne &#9660;</button>
+      <div class="so-cue-panel" id="so-cue-panel" hidden></div>
+    </div>
+
+    <!-- Panneau REPOS -->
+    <div class="so-pane so-rest-pane" id="so-rest" hidden>
+      <div style="flex:.3"></div>
+      <div class="so-rest-ttl">Repos</div>
+      <div class="so-rrw">
+        <svg width="190" height="190" viewBox="0 0 190 190">
+          <circle cx="95" cy="95" r="80" fill="none" stroke="var(--line)" stroke-width="10"/>
+          <circle id="so-rring" cx="95" cy="95" r="80" fill="none" stroke="var(--eq)" stroke-width="10"
+            stroke-linecap="round" transform="rotate(-90 95 95)"/>
+        </svg>
+        <div class="so-rn" id="so-rn">90</div>
+      </div>
+      <div class="so-next-wrap">
+        <div class="so-next-lbl">Ensuite</div>
+        <div class="so-next-fig" id="so-next-fig"></div>
+        <div class="so-next-name" id="so-next-name"></div>
+      </div>
+      <div class="so-rest-acts">
+        <button class="so-btn-g" id="so-plus15">+15 s</button>
+        <button class="so-btn-p" id="so-skip-rest">Passer &#8250;</button>
+      </div>
+      <div style="flex:.5"></div>
+    </div>
+
+    <!-- Panneau FIN DE SÉANCE -->
+    <div class="so-pane so-done-pane" id="so-done" hidden>
+      <div class="so-done-em">&#128170;</div>
+      <div class="so-done-ttl">Séance terminée !</div>
+      <div class="so-done-sub">Bon travail. N'oublie pas de cocher ta séance dans le suivi.</div>
+      <button class="so-btn-p" id="so-finish-btn" style="margin-top:14px">Fermer</button>
+    </div>
+
+  </div><!-- /.so-body -->
+
+  <!-- Pied : navigation précédent / suivant -->
+  <div class="so-foot" id="so-foot" hidden>
+    <button class="so-btn-g" id="so-prev-btn">&#8249; Préc.</button>
+    <button class="so-btn-p" id="so-next-btn">Série terminée &#8250;</button>
+  </div>
+
+  <!-- Overlay pause/confirmation quitter -->
+  <div class="so-po" id="so-po" hidden>
+    <div class="so-pc">
+      <div class="so-po-ttl">Pause &#9208;</div>
+      <button class="so-btn-p" id="so-resume-btn" style="min-width:220px">&#9654; Reprendre</button>
+      <button class="so-btn-d" id="so-quit-confirm">Quitter la séance</button>
+    </div>
+  </div>
+
+</div><!-- /#so -->
+
 
 <footer><div class="wrap">Base : Recommended Routine de r/bodyweightfitness, adaptée à un objectif recomposition (emphase pecs &amp; gainage) avec un système d'adhérence sur mesure. Illustrations originales. Ceci n'est pas un avis médical.</div></footer>
 
@@ -460,21 +721,413 @@ function progCard(item){
   }
 })();
 
-/* ---- rest timer ---- */
+/* ---- minuteur de repos (timer sheet) ---- */
 (function(){
-  const ring=document.getElementById('ring'), txt=document.getElementById('ttxt');
-  const C=2*Math.PI*19; ring.setAttribute('stroke-dasharray',C.toFixed(1));
-  let total=90,left=90,iv=null;
-  function draw(){txt.textContent=left;ring.setAttribute('stroke-dashoffset',(C*(1-left/total)).toFixed(1));}
-  function beep(){try{const a=new (window.AudioContext||window.webkitAudioContext)();const o=a.createOscillator();
-    const g=a.createGain();o.connect(g);g.connect(a.destination);o.frequency.value=760;g.gain.value=.18;
-    o.start();setTimeout(()=>{o.stop();a.close();},260);}catch(e){}}
-  function start(sec){total=sec;left=sec;draw();clearInterval(iv);
-    iv=setInterval(()=>{left--;if(left<=0){clearInterval(iv);left=0;draw();beep();return;}draw();},1000);}
-  document.getElementById('t90').onclick=()=>start(90);
-  document.getElementById('t60').onclick=()=>start(60);
+  const RC = 2 * Math.PI * 63; // rayon 63 → dasharray
+  const ring = document.getElementById('ts-ring');
+  const numEl = document.getElementById('ts-n');
+  ring.setAttribute('stroke-dasharray', RC.toFixed(1));
+  let total = 90, left = 90, iv = null;
+
+  function draw() {
+    numEl.textContent = left;
+    ring.setAttribute('stroke-dashoffset', (RC * (1 - left / total)).toFixed(1));
+  }
+  function beep(freq, dur) {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.value = freq; g.gain.value = .2;
+      o.start(); setTimeout(() => { try { o.stop(); ctx.close(); } catch(e) {} }, dur);
+    } catch(e) {}
+  }
+  function start(sec) {
+    total = sec; left = sec; draw(); clearInterval(iv);
+    iv = setInterval(() => {
+      left--;
+      if (left <= 3 && left > 0) beep(880, 80);
+      if (left <= 0) { clearInterval(iv); left = 0; draw(); beep(440, 300); return; }
+      draw();
+    }, 1000);
+  }
+
+  const sheet = document.getElementById('ts');
+  function openSheet() { sheet.hidden = false; }
+  function closeSheet() { sheet.hidden = true; clearInterval(iv); }
+
+  document.getElementById('bb-timer').onclick = openSheet;
+  document.getElementById('ts-x').onclick = closeSheet;
+  document.getElementById('ts-bd').onclick = closeSheet;
+  document.getElementById('ts-90').onclick = () => start(90);
+  document.getElementById('ts-60').onclick = () => start(60);
+  document.getElementById('ts-45').onclick = () => start(45);
   draw();
 })();
+
+/* ---- mode séance guidé ---- */
+(function(){
+
+  // ── Utilitaires ────────────────────────────────────────────
+  function isTimed(s) { return /\d\s*s\b/.test(s); }
+  function parseSec(s) {
+    // "20-30 s" → 25 ;  "30 s" → 30
+    const m = s.match(/(\d+)[^\d]+(\d+)\s*s/);
+    if (m) return Math.round((+m[1] + +m[2]) / 2);
+    const m2 = s.match(/(\d+)\s*s/);
+    return m2 ? +m2[1] : 30;
+  }
+  function dispReps(reps) {
+    // "3 × 5-8" → "5-8" ;  "3 × 20-30 s" → "20-30 s"
+    const m = reps.match(/\d+\s*[×x]\s*(.+)/u);
+    return m ? m[1].trim() : reps;
+  }
+  function getLvIdx(item) {
+    const saved = store.get('bpb_levels', {});
+    const k = 'lv_' + item.label.replace(/[^a-z0-9]/gi, '').toLowerCase();
+    return (k in saved) ? saved[k] : (item.start || 0);
+  }
+  function mkSvg(id) { return svgWrap(EX[id].svg); }
+
+  // Audio
+  function playBeep(freq, dur, vol) {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.value = freq; g.gain.value = vol || .18;
+      o.start();
+      setTimeout(() => { try { o.stop(); ctx.close(); } catch(e) {} }, dur);
+    } catch(e) {}
+  }
+  function tick() { playBeep(880, 70, .12); }  // tic des 3 dernières secondes
+  function dong() { playBeep(440, 280, .28); }  // bip final
+  function vibe(p) { try { navigator.vibrate && navigator.vibrate(p); } catch(e) {} }
+
+  // Wake Lock
+  let wl = null;
+  async function keepAwake() {
+    try { if ('wakeLock' in navigator) wl = await navigator.wakeLock.request('screen'); } catch(e) {}
+  }
+  function releaseWake() { try { if (wl) { wl.release(); wl = null; } } catch(e) {} }
+
+  // ── Construction de la séquence ────────────────────────────
+  function buildSteps() {
+    const steps = [];
+
+    // Échauffement — aucun repos entre les exos
+    CFG.warmup.forEach(id => {
+      const dose = CFG.warmupDose[id];
+      const timed = isTimed(dose);
+      steps.push({ section: 'Échauffement', exId: id,
+        isTime: timed, duration: timed ? parseSec(dose) : 0,
+        display: dose, restAfter: 0 });
+    });
+
+    // Skill ATR — 3 séries chronométrées, 60 s de repos entre chaque
+    const skillLv = getLvIdx({ label: 'Projet skill', levels: CFG.skill.levels, start: CFG.skill.start || 0 });
+    const skillId = CFG.skill.levels[Math.min(skillLv, CFG.skill.levels.length - 1)];
+    const skillDur = parseSec(CFG.skill.reps);
+    const skillDisp = dispReps(CFG.skill.reps);
+    for (let t = 1; t <= 3; t++) {
+      steps.push({ section: 'Skill ATR', exId: skillId,
+        isTime: true, duration: skillDur, display: skillDisp,
+        tour: t, totalTours: 3, restAfter: t < 3 ? 60 : 0 });
+    }
+
+    // Paire A et B — 3 tours en super-set, 90 s de repos après chaque tour complet
+    [0, 1].forEach(bi => {
+      const bl = CFG.blocks[bi];
+      for (let t = 1; t <= 3; t++) {
+        bl.items.forEach((item, ii) => {
+          const lvIdx = getLvIdx(item);
+          const exId = item.levels[Math.min(lvIdx, item.levels.length - 1)];
+          const timed = isTimed(item.reps);
+          const isLastInTour = ii === bl.items.length - 1;
+          steps.push({ section: bl.tag + ' — ' + bl.title, exId,
+            label: item.label, isTime: timed,
+            duration: timed ? parseSec(item.reps) : 0,
+            display: dispReps(item.reps),
+            tour: t, totalTours: 3,
+            restAfter: (isLastInTour && t < 3) ? 90 : 0 });
+        });
+      }
+    });
+
+    // Gainage — chaque exo séparé, 60 s de repos (sauf après le dernier)
+    const gain = CFG.blocks[2];
+    gain.items.forEach((item, ii) => {
+      const lvIdx = getLvIdx(item);
+      const exId = item.levels[Math.min(lvIdx, item.levels.length - 1)];
+      const timed = isTimed(item.reps);
+      const isLast = ii === gain.items.length - 1;
+      steps.push({ section: 'Gainage', exId, label: item.label,
+        isTime: timed, duration: timed ? parseSec(item.reps) : 0,
+        display: item.reps, restAfter: isLast ? 0 : 60 });
+    });
+
+    return steps;
+  }
+
+  // ── État de la séance ───────────────────────────────────────
+  let steps = [], sIdx = 0, sState = 'intro', sTimer = null,
+      sLeft = 0, sTotal = 0, sPaused = false;
+
+  // ── Références DOM ─────────────────────────────────────────
+  const soEl       = document.getElementById('so');
+  const soFill     = document.getElementById('so-fill');
+  const soStepLbl  = document.getElementById('so-step-lbl');
+  const soBody     = document.getElementById('so-body');
+  const soFoot     = document.getElementById('so-foot');
+  const soPo       = document.getElementById('so-po');
+  const paneIntro  = document.getElementById('so-intro');
+  const paneEx     = document.getElementById('so-ex');
+  const paneRest   = document.getElementById('so-rest');
+  const paneDone   = document.getElementById('so-done');
+  const soTag      = document.getElementById('so-tag');
+  const soEn       = document.getElementById('so-en');
+  const soFigEl    = document.getElementById('so-fig');
+  const soTgt      = document.getElementById('so-tgt');
+  const soTourLbl  = document.getElementById('so-tour-lbl');
+  const soCrw      = document.getElementById('so-crw');
+  const soCrn      = document.getElementById('so-crn');
+  const soRing     = document.getElementById('so-ring');
+  const soMusc     = document.getElementById('so-musc');
+  const soCueBtn   = document.getElementById('so-cue-btn');
+  const soCuePanel = document.getElementById('so-cue-panel');
+  const soRn       = document.getElementById('so-rn');
+  const soRring    = document.getElementById('so-rring');
+  const soNextFig  = document.getElementById('so-next-fig');
+  const soNextName = document.getElementById('so-next-name');
+
+  // Initialisation des anneaux SVG
+  const RC_EX   = 2 * Math.PI * 50; // r=50 dans so-ring
+  const RC_REST = 2 * Math.PI * 80; // r=80 dans so-rring
+  soRing.setAttribute('stroke-dasharray', RC_EX.toFixed(1));
+  soRring.setAttribute('stroke-dasharray', RC_REST.toFixed(1));
+
+  // ── Helpers UI ─────────────────────────────────────────────
+  function showPane(id) {
+    [paneIntro, paneEx, paneRest, paneDone].forEach(p => { p.hidden = true; });
+    document.getElementById(id).hidden = false;
+    soBody.scrollTop = 0;
+  }
+
+  function updateHeader() {
+    const total = steps.length;
+    if (!total) return;
+    const pct = (sIdx / total) * 100;
+    soFill.style.width = pct + '%';
+    soStepLbl.textContent = 'Étape ' + (sIdx + 1) + ' / ' + total;
+  }
+
+  function stopTimer() { clearInterval(sTimer); sTimer = null; }
+
+  function drawExRing(left, tot) {
+    soRing.setAttribute('stroke-dashoffset', (RC_EX * (1 - left / tot)).toFixed(1));
+    soCrn.textContent = left;
+  }
+  function drawRestRing(left, tot) {
+    soRring.setAttribute('stroke-dashoffset', (RC_REST * (1 - left / tot)).toFixed(1));
+    soRn.textContent = left;
+  }
+
+  // ── Rendu panneau exercice ─────────────────────────────────
+  function renderEx(step) {
+    stopTimer(); sState = 'ex';
+    showPane('so-ex'); soFoot.hidden = false;
+    const ex = EX[step.exId];
+
+    soTag.textContent = step.section;
+    soEn.textContent = ex.name;
+    soFigEl.innerHTML = mkSvg(step.exId);
+    soTgt.textContent = step.display || '';
+    soTourLbl.textContent = step.tour
+      ? 'Tour ' + step.tour + ' / ' + step.totalTours : '';
+
+    // Muscles
+    soMusc.innerHTML = (ex.muscles || '').split(',')
+      .filter(m => m.trim())
+      .map(m => '<span class="so-mt">' + m.trim() + '</span>').join('');
+
+    // Consigne repliable
+    soCuePanel.hidden = true;
+    soCueBtn.textContent = 'Consigne ▾';
+    if (ex.info) {
+      soCuePanel.innerHTML =
+        '<b>Comment faire :</b> ' + ex.info.exec + '<br><br>' +
+        '<b>Erreur fréquente :</b> ' + ex.info.mistake + '<br><br>' +
+        '<b>Astuce :</b> ' + ex.info.tip;
+    } else {
+      soCuePanel.textContent = ex.cue || '';
+    }
+
+    const nextBtn = document.getElementById('so-next-btn');
+    nextBtn.textContent = step.isTime ? 'Passer ›' : 'Série terminée ›';
+
+    if (step.isTime) {
+      soCrw.hidden = false;
+      soTgt.style.opacity = '0'; // masqué : l'anneau affiche la durée
+      sLeft = step.duration; sTotal = step.duration;
+      drawExRing(sLeft, sTotal);
+
+      sTimer = setInterval(() => {
+        if (sPaused) return;
+        sLeft--;
+        if (sLeft <= 3 && sLeft > 0) tick();
+        if (sLeft <= 0) {
+          stopTimer(); dong(); vibe([100, 50, 100]);
+          onExDone(); return;
+        }
+        drawExRing(sLeft, sTotal);
+      }, 1000);
+    } else {
+      soCrw.hidden = true;
+      soTgt.style.opacity = '';
+    }
+    updateHeader();
+  }
+
+  // ── Rendu panneau repos ────────────────────────────────────
+  function renderRest(restSec) {
+    stopTimer(); sState = 'rest';
+    showPane('so-rest'); soFoot.hidden = true;
+
+    sLeft = restSec; sTotal = restSec;
+    drawRestRing(sLeft, sTotal);
+
+    // Aperçu prochain exo
+    const nextStep = steps[sIdx + 1];
+    if (nextStep) {
+      soNextFig.innerHTML = mkSvg(nextStep.exId);
+      soNextName.textContent = EX[nextStep.exId].name;
+    } else {
+      soNextFig.innerHTML = '';
+      soNextName.textContent = 'Terminé !';
+    }
+
+    sTimer = setInterval(() => {
+      if (sPaused) return;
+      sLeft--;
+      if (sLeft <= 3 && sLeft > 0) tick();
+      if (sLeft <= 0) {
+        stopTimer(); dong(); vibe([100, 50, 100]);
+        advance(); return;
+      }
+      drawRestRing(sLeft, sTotal);
+    }, 1000);
+  }
+
+  // ── Logique d'enchaînement ─────────────────────────────────
+  function onExDone() {
+    const step = steps[sIdx];
+    if (step.restAfter > 0) {
+      renderRest(step.restAfter);
+    } else {
+      advance();
+    }
+  }
+
+  function advance() {
+    sIdx++;
+    if (sIdx >= steps.length) { endSession(); return; }
+    renderEx(steps[sIdx]);
+  }
+
+  function endSession() {
+    stopTimer(); sState = 'done';
+    showPane('so-done'); soFoot.hidden = true;
+    soFill.style.width = '100%';
+    soStepLbl.textContent = 'Terminé !';
+    releaseWake();
+  }
+
+  // ── Démarrage ──────────────────────────────────────────────
+  function startSession() {
+    steps = buildSteps();
+    sIdx = 0; sPaused = false; sState = 'intro';
+    soPo.hidden = true;
+    soEl.hidden = false;
+    document.body.style.overflow = 'hidden';
+    keepAwake();
+
+    // Panneau intro : liste des sections
+    showPane('so-intro'); soFoot.hidden = true;
+    const seqEl = document.getElementById('so-intro-seq');
+    seqEl.innerHTML = '';
+    const seen = [];
+    steps.forEach(s => {
+      if (!seen.includes(s.section)) {
+        seen.push(s.section);
+        const row = document.createElement('div');
+        row.className = 'so-seq-row';
+        const cnt = steps.filter(x => x.section === s.section).length;
+        row.innerHTML = '<span class="srt">' + cnt + '&nbsp;ex.</span><span>' + s.section + '</span>';
+        seqEl.appendChild(row);
+      }
+    });
+    updateHeader();
+  }
+
+  // ── Événements ─────────────────────────────────────────────
+  document.getElementById('bb-start').onclick = startSession;
+  document.getElementById('so-intro-go').onclick = () => {
+    if (steps.length) renderEx(steps[sIdx]);
+  };
+
+  // Consigne dépliable
+  soCueBtn.onclick = () => {
+    soCuePanel.hidden = !soCuePanel.hidden;
+    soCueBtn.textContent = soCuePanel.hidden ? 'Consigne ▾' : 'Consigne ▴';
+  };
+
+  // Suivant
+  document.getElementById('so-next-btn').onclick = () => {
+    if (sState === 'ex') { stopTimer(); onExDone(); }
+  };
+
+  // Précédent
+  document.getElementById('so-prev-btn').onclick = () => {
+    if (sState === 'rest') { stopTimer(); renderEx(steps[sIdx]); return; }
+    if (sIdx > 0) { stopTimer(); sIdx--; renderEx(steps[sIdx]); }
+  };
+
+  // +15 s et Passer (panneau repos)
+  document.getElementById('so-plus15').onclick = () => {
+    sLeft += 15; sTotal = Math.max(sTotal, sLeft);
+    drawRestRing(sLeft, sTotal);
+  };
+  document.getElementById('so-skip-rest').onclick = () => { stopTimer(); advance(); };
+
+  // Pause / Reprendre
+  const pauseBtn = document.getElementById('so-pause-btn');
+  pauseBtn.onclick = () => {
+    sPaused = !sPaused;
+    soPo.hidden = !sPaused;
+    pauseBtn.textContent = sPaused ? '▶' : '⏸';
+  };
+  document.getElementById('so-resume-btn').onclick = () => {
+    sPaused = false; soPo.hidden = true;
+    pauseBtn.textContent = '⏸';
+  };
+
+  // Quitter
+  function quitSession() {
+    stopTimer(); releaseWake();
+    soEl.hidden = true;
+    document.body.style.overflow = '';
+    steps = []; sIdx = 0; sPaused = false; sState = 'intro';
+    pauseBtn.textContent = '⏸';
+  }
+  document.getElementById('so-quit-btn').onclick = () => {
+    sPaused = true; soPo.hidden = false;
+    pauseBtn.textContent = '▶';
+  };
+  document.getElementById('so-quit-confirm').onclick = quitSession;
+  document.getElementById('so-finish-btn').onclick = quitSession;
+
+})();
+
 
 /* ---- nav scroll-spy ---- */
 (function(){
